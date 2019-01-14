@@ -9,6 +9,8 @@ acao VARCHAR(255),
 estado varchar(255),
 cidade varchar(255),
 tipoSangue VARCHAR (255),
+vinculoHospital bigint not null,
+foreign key (vinculoHospital) references hospital(id),
 primary key (id)
 );
 
@@ -21,8 +23,6 @@ cnpj VARCHAR(255),
 endereco VARCHAR(255),
 estado varchar(255),
 cidade varchar(255),
-pessoaVinculo integer
-primary key (id),
-foreign key (pessoaVinculo) references pessoa(id)
+primary key (id)
 );
 
