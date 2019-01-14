@@ -74,5 +74,12 @@ public class Pessoa {
 	String sexo;
 	String acao;
 	String tipoSangue;
+		Long vinculoHospital;
+		public Long getVinculoHospital() {
+			return vinculoHospital;
+		}
+		public void setVinculoHospital(Long vinculoHospital) {
+			this.vinculoHospital = vinculoHospital;
+		}
 		
 }

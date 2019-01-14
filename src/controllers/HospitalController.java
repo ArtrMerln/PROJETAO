@@ -1,8 +1,12 @@
 package controllers;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import daos.HospitalDAO;
 import daos.PessoaDAO;
@@ -26,5 +30,27 @@ public class HospitalController {
 		System.out.println("adicionou o hospital ");
 		return "redirect:hospital";
 	}
+
+	
+	
+	@GetMapping("/hospital")
+	public ModelAndView listar() {
+	System.out.println("chamou a lsitagem de pessoa");
+		HospitalDAO hdao = new HospitalDAO();
+		List<Hospital> lista = hdao.getLista();
+		ModelAndView model = new ModelAndView("hospital/list");
+		model.addObject("hospital", lista);
+		return model;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
+
+
