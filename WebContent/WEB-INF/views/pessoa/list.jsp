@@ -11,7 +11,7 @@
 <body>
 	<c:import url="../menu.jsp"></c:import>
 
-	<h1>Lista de Contatos</h1>
+	<h1>Lista de pessoas</h1>
 
 	<table border="1">
 		<thead>

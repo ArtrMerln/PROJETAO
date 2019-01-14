@@ -34,6 +34,7 @@ public class PessoaController {
 	public String adicionar(Pessoa pessoa)
 	{
 		PessoaDAO pdao =  new PessoaDAO();
+	System.out.println(pessoa.getAcao() + pessoa.getHospital());
 		pdao.inserir(pessoa);
 		System.out.println("adicionou o cara ");
 		return "redirect:pessoa";
@@ -45,6 +46,7 @@ public class PessoaController {
 		PessoaDAO pdao = new PessoaDAO();
 		List<Pessoa> lista = pdao.getLista();
 		ModelAndView model = new ModelAndView("pessoa/list");
+		
 		model.addObject("pessoa", lista);
 		return model;
 	}

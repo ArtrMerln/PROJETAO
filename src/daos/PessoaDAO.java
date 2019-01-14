@@ -24,7 +24,7 @@ public class PessoaDAO {
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
 		
-Hospital hosp = new Hospital();			
+		
 			
 				stmt.setString(1, pessoa.getNome());
 				stmt.setString(2, pessoa.getCpf());
@@ -35,8 +35,9 @@ Hospital hosp = new Hospital();
 				stmt.setString(7, pessoa.getSexo());
 				stmt.setString(8, pessoa.getAcao());
 				stmt.setString(9, pessoa.getTipoSangue());
-				stmt.setLong(10, hosp.getId());
-							stmt.execute();
+				pessoa.setVinculoHospital(pessoa.getHospital().getId());
+				stmt.setLong(10, pessoa.getVinculoHospital());
+				stmt.execute();
 				stmt.close();
 			
 		} catch (SQLException e) {

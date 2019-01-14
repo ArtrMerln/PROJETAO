@@ -41,12 +41,10 @@
 		</div>
 		
 		<h2>
-			vinculado ao hospital: <select name="vainculoHospital">
+			vinculado ao hospital: <select name="hospital.id">
 				<c:forEach var="hospital" items="${hospital }">
 					<option value="${hospital.id }">${hospital.nome }</option>
 				
-		
-
 				</c:forEach>
 				
 				
