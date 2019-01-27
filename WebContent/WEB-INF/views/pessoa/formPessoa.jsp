@@ -23,7 +23,7 @@
 		<div>
 			<label>Endereço:</label> <input type="text" name="endereco">
 		</div>
-		
+
 		<div>
 			<label>estado:</label> <input type="text" name="estado">
 		</div>
@@ -31,31 +31,42 @@
 			<label>cidade:</label> <input type="text" name="cidade">
 		</div>
 		<div>
-			<label>Sexo:</label> <input type="text" name="sexo">
+			Sexo: <input type="radio" name="sexo" value="M">Masculino <input
+				type="radio" name="sexo" value="F">Feminino
+		</div>
+
+		<div>
+			Tipo Sanguíneo: <select name="tipoSangue">
+
+				<option value="A+">A+</option>
+				<option value="A-">A-</option>
+				<option value="B+">B+</option>
+				<option value="B-">B-</option>
+				<option value="AB+">AB+</option>
+				<option value="AB-">AB-</option>
+				<option value="O+">O+</option>
+				<option value="O-">O-</option>
+
+			</select>
 		</div>
 		<div>
-			<label>acao:</label> <input type="text" name="acao">
+			<input type="radio" name="acao" value="Doador">Doador <input
+				type="radio" name="acao" value="Receptor">Receptor
 		</div>
-		<div>
-			<label>tipo sanguineo:</label> <input type="text" name="tipoSangue">
-		</div>
-		
-		<h2>
+
+		<h2> 
 			vinculado ao hospital: <select name="hospital.id">
 				<c:forEach var="hospital" items="${hospital }">
 					<option value="${hospital.id }">${hospital.nome }</option>
-				
+
 				</c:forEach>
-				
-				
-				
 			</select>
 		</h2>
-		
+
 		<div>
 			<button type="submit">Adicionar</button>
 		</div>
 	</form>
-	
+
 </body>
 </html>

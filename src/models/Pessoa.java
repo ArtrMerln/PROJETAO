@@ -2,6 +2,7 @@ package models;
 
 public class Pessoa {
 
+	TipoS a = new TipoS();
 	
 	
 	 Long id;
@@ -74,12 +75,31 @@ public class Pessoa {
 	String sexo;
 	String acao;
 	String tipoSangue;
+	
 	Hospital hospital;
+	String padrao;
 	
 	
-	
+	public String getPadrao() {
+		return padrao;
+	}
+	public void setPadrao(String padrao) {
+		this.padrao = padrao;
+	}
 	public Hospital getHospital() {
 		return hospital;
+	}
+	public TipoS getA() {
+		return a;
+	}
+	public void setA(TipoS a) {
+		this.a = a;
+	}
+	public String getNecessidade() {
+		return necessidade;
+	}
+	public void setNecessidade(String necessidade) {
+		this.necessidade = necessidade;
 	}
 	public void setHospital(Hospital hospital) {
 		this.hospital = hospital;
@@ -91,5 +111,8 @@ public class Pessoa {
 		public void setVinculoHospital(Long vinculoHospital) {
 			this.vinculoHospital = vinculoHospital;
 		}
+		
+		String necessidade;
+		
 		
 }

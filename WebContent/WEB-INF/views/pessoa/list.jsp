@@ -31,8 +31,8 @@
 					<td>${pessoa.endereco }</td>
 					<td>${pessoa.tipoSangue }</td>
 					<td>${pessoa.acao }</td>
-					<td><a href="/agendaspring/contatos/remover?id=${contato.id }">Remover</a></td>
-					<td><a href="/agendaspring/contatos/selecionar?id=${contato.id }">Alterar</a></td>
+					<td><a href="/projetao/pessoa/lancer?tipoSangue=${pessoa.tipoSangue }">pedir doacao</a></td>
+				
 				</tr>
 			</c:forEach>
 

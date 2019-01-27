@@ -51,5 +51,12 @@ public class PessoaController {
 		return model;
 	}
 	
-	
+	@RequestMapping("/lancer")
+	public String lecPd(Pessoa pessoa) {
+		System.out.println("Chamou método de remover");
+		PessoaDAO pdao = new PessoaDAO();
+		pdao.MandaOCARALHOdoNEGOCIOPADRAO(pessoa);
+
+		return "redirect:../pessoa";
+}
 }

@@ -61,7 +61,7 @@ public class PessoaDAO {
 				pessoa.setId(rs.getLong("id"));
 				pessoa.setNome(rs.getString("nome"));
 				pessoa.setEmail(rs.getString("email"));
-				pessoa.setEndereco(rs.getString("endereco"));
+				pessoa.setEndereco(rs.getString("endereco"));  
 				pessoa.setAcao(rs.getString("acao"));
 				pessoa.setCidade(rs.getString("sexo"));
 				pessoa.setCpf(rs.getString("sexo"));
@@ -80,7 +80,86 @@ public class PessoaDAO {
 		return result;
 	}
 	
+	public boolean pedirDoacao(Pessoa pessoa) {
+
+		
+			String sql = "update pessoa set necessidade=? where id=?;";
+			try {
+				PreparedStatement stmt = connection.prepareStatement(sql);
+				stmt.setString(1, pessoa.getNecessidade());
+			
+			
+				stmt.execute();
+				stmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return false;
+			}
+			return true;
+	}
 	
+	public boolean LanceNecessariodapeticaodeDOACAO(Pessoa pessoa) {
+
+		
+		String sql = "update pessoa set necessidade=? where id=?;";
+		try {
+			PreparedStatement stmt = connection.prepareStatement(sql);
+			stmt.setString(1, pessoa.getNecessidade());
+			MandaOCARALHOdoNEGOCIOPADRAO(pessoa);
+			stmt.execute();
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+}
+
+
+
+public List<Pessoa> MandaOCARALHOdoNEGOCIOPADRAO(Pessoa pessoa) {
+	List<Pessoa> result = new ArrayList<>();
+
+	try {
+		PreparedStatement stmt = this.connection.prepareStatement("select * from pessoa WHERE tipoSangue=? and acao = 'Doador'");
+		ResultSet rs = stmt.executeQuery();
+
+		while (rs.next()) {
+			
+		
+			pessoa.setTipoSangue(rs.getString("tipoSangue"));
+		pessoa.setPadrao(rs.getString("padrao"));
+		LancerPadrao(pessoa);
+			
+			// adicionando o objeto 
+			result.add(pessoa);
+		}
+		rs.close();
+		stmt.close();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+
+	return result;
+}
+
+public boolean LancerPadrao(Pessoa pessoa) {
+
 	
-	
+	String sql = "update pessoa set padrao=?";
+	try {
+		PreparedStatement stmt = connection.prepareStatement(sql);
+		stmt.setString(1, pessoa.getPadrao());
+		
+		stmt.execute();
+		stmt.close();
+	} catch (SQLException e) {
+		e.printStackTrace();
+		return false;
+	}
+	return true;
+}
+
+
+
 }
