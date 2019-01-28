@@ -50,13 +50,24 @@ public class PessoaController {
 		model.addObject("pessoa", lista);
 		return model;
 	}
-	
-	@RequestMapping("/lancer")
-	public String lecPd(Pessoa pessoa) {
-		System.out.println("Chamou método de remover");
+	@GetMapping("/pessoa/")
+	public ModelAndView listarFa() {
+	System.out.println("chamou a lsitagem de pessoa");
 		PessoaDAO pdao = new PessoaDAO();
-		pdao.MandaOCARALHOdoNEGOCIOPADRAO(pessoa);
-
+		List<Pessoa> lista = pdao.getLista();
+		ModelAndView model = new ModelAndView("pessoa/ListaDoador");
+		
+		model.addObject("pessoa", lista);
+		return model;
+	}
+	
+	@RequestMapping("pessoa/lancer")
+	public String lecPd(Pessoa pessoa) {
+		System.out.println("Chamou método de lançar");
+		PessoaDAO pdao = new PessoaDAO();
+	System.out.println("id"+ pessoa.getId());
+		pdao.getById(pessoa);
+System.out.println("fez algo? ");
 		return "redirect:../pessoa";
 }
 }

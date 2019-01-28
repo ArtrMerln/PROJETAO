@@ -105,7 +105,7 @@ public class PessoaDAO {
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			stmt.setString(1, pessoa.getNecessidade());
-			MandaOCARALHOdoNEGOCIOPADRAO(pessoa);
+			selectSanguById(pessoa);
 			stmt.execute();
 			stmt.close();
 		} catch (SQLException e) {
@@ -117,19 +117,24 @@ public class PessoaDAO {
 
 
 
-public List<Pessoa> MandaOCARALHOdoNEGOCIOPADRAO(Pessoa pessoa) {
+public List<Pessoa> selectSanguById(Pessoa pessoa) {
 	List<Pessoa> result = new ArrayList<>();
 
 	try {
-		PreparedStatement stmt = this.connection.prepareStatement("select * from pessoa WHERE tipoSangue=? and acao = 'Doador'");
+		PreparedStatement stmt = this.connection.prepareStatement("select tipoSangue from pessoa where id=?");
 		ResultSet rs = stmt.executeQuery();
-
-		while (rs.next()) {
-			
 		
-			pessoa.setTipoSangue(rs.getString("tipoSangue"));
-		pessoa.setPadrao(rs.getString("padrao"));
-		LancerPadrao(pessoa);
+		
+		stmt.setLong(1, pessoa.getId());
+		System.out.println("id" + pessoa.getId());
+		while (rs.next()) {
+		
+		
+		
+		pessoa.setTipoSangue(rs.getString("tipoSangue"));
+		
+		System.out.println(pessoa.getTipoSangue());
+		//listaparaUsoDoCaralho(pessoa);
 			
 			// adicionando o objeto 
 			result.add(pessoa);
@@ -143,14 +148,44 @@ public List<Pessoa> MandaOCARALHOdoNEGOCIOPADRAO(Pessoa pessoa) {
 	return result;
 }
 
-public boolean LancerPadrao(Pessoa pessoa) {
+
+
+public Pessoa getById(Pessoa pessoa) {
+	Pessoa result = null;
+
+	try {
+		PreparedStatement stmt = this.connection.prepareStatement("select tipoSangue from pessoa where id=?;");
+		System.out.println("id"+ pessoa.getId());
+		stmt.setLong(1, pessoa.getId());
+		ResultSet rs = stmt.executeQuery();
+
+		if (rs.next()) {
+			// criando o objeto speaker
+			result = new Pessoa();
+			result.setNome(rs.getString("tipoSangue"));
+			
+		}
+		System.out.println(rs.getString("tipoSangue"));
+		//selectDePessoasPeloSangue(pessoa);
+		getListaSelect(pessoa);
+		rs.close();
+		stmt.close();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+
+	return result;
+}
+public boolean LancerPadraoMais(Pessoa pessoa) {
 
 	
-	String sql = "update pessoa set padrao=?";
+	String sql = "update pessoa set padrao=? where id=?";
 	try {
 		PreparedStatement stmt = connection.prepareStatement(sql);
-		stmt.setString(1, pessoa.getPadrao());
-		
+	
+	System.out.println(pessoa.getPadrao());
+		stmt.setString(1, "1");
+		stmt.setLong(2, pessoa.getId());
 		stmt.execute();
 		stmt.close();
 	} catch (SQLException e) {
@@ -159,7 +194,94 @@ public boolean LancerPadrao(Pessoa pessoa) {
 	}
 	return true;
 }
+public List<Pessoa> listaparaUsoDoCaralho(Pessoa pessoa) {
+	List<Pessoa> result = new ArrayList<>();
 
+	try {
+		PreparedStatement stmt = this.connection.prepareStatement("select * FROM PESSOA WHERE tipoSangue=?");
+		ResultSet rs = stmt.executeQuery();
+		
+		
+		stmt.setString(1, pessoa.getTipoSangue());
+		
+		
+		
+		while (rs.next()) {
+			
+			pessoa.setTipoSangue(rs.getString("tipoSangue"));
+		
+		
+		LancerPadraoMais(pessoa);
+			
+			// adicionando o objeto 
+			result.add(pessoa);
+		}
+		rs.close();
+		stmt.close();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
 
+	return result;
+}
+
+public Pessoa selectDePessoasPeloSangue(Pessoa pessoa) {
+	Pessoa result = null;
+
+	try {
+		PreparedStatement stmt = this.connection.prepareStatement("select * FROM PESSOA WHERE tipoSangue=?;");
+		stmt.setString(1, pessoa.getTipoSangue());
+		ResultSet rs = stmt.executeQuery();
+
+		while (rs.next()) {
+		
+			result = new Pessoa();
+			result.setId(rs.getLong("id"));
+			result.setNome(rs.getString("nome"));
+			System.out.println(rs.getString("nome"));
+			System.out.println(rs.getLong("id"));
+			LancerPadraoMais(pessoa);
+
+		}
+		rs.close();
+		stmt.close();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+
+	return result;
+}
+public List<Pessoa> getListaSelect(Pessoa pessoa) {
+	List<Pessoa> result = new ArrayList<>();
+
+	try {
+		PreparedStatement stmt = this.connection.prepareStatement("select * FROM PESSOA WHERE tipoSangue=?;");
+		ResultSet rs = stmt.executeQuery();
+
+		while (rs.next()) {
+			
+		
+			stmt.setString(1, pessoa.getTipoSangue());
+			pessoa.setId(rs.getLong("id"));
+			pessoa.setNome(rs.getString("nome"));
+			pessoa.setEmail(rs.getString("email"));
+			pessoa.setEndereco(rs.getString("endereco"));  
+			pessoa.setAcao(rs.getString("acao"));
+			pessoa.setCidade(rs.getString("sexo"));
+			pessoa.setCpf(rs.getString("sexo"));
+			pessoa.setTipoSangue(rs.getString("tipoSangue"));
+			pessoa.setEstado(rs.getString("estado"));
+			LancerPadraoMais(pessoa);
+			// adicionando o objeto 
+			result.add(pessoa);
+		}
+		rs.close();
+		stmt.close();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+
+	return result;
+}
 
 }
