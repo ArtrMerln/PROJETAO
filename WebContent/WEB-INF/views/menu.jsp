@@ -8,6 +8,6 @@
 		<li><a href="/projetao/hospital/formHospital">adicionar hospital</a></li>
 	<li><a href="/projetao/pessoa">lsita pessoa</a></li>
 	<li><a href="/projetao/hospital">lista hospital</a></li>
-	<li><a href="/projetao/pessoa/">lista de pessoas doadores</a></li>
+	<li><a href="/projetao/pessoa/">lista de pessoas receptoras</a></li>
 	</ul>
 </nav>

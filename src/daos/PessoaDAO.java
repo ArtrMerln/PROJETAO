@@ -64,10 +64,11 @@ public class PessoaDAO {
 				pessoa.setEndereco(rs.getString("endereco"));  
 				pessoa.setAcao(rs.getString("acao"));
 				pessoa.setCidade(rs.getString("sexo"));
-				pessoa.setCpf(rs.getString("sexo"));
+				pessoa.setCpf(rs.getString("cpf"));
 				pessoa.setTipoSangue(rs.getString("tipoSangue"));
 				pessoa.setEstado(rs.getString("estado"));
-				
+				pessoa.setNecessidade(rs.getString("necessidade"));
+				pessoa.setVinculoHospital(rs.getLong("VinculoHospital"));
 				// adicionando o objeto 
 				result.add(pessoa);
 			}
@@ -167,6 +168,7 @@ public Pessoa getById(Pessoa pessoa) {
 		}
 		System.out.println(rs.getString("tipoSangue"));
 		//selectDePessoasPeloSangue(pessoa);
+		LancerPadraoMaisNecessidade(pessoa);
 		getListaSelect(pessoa);
 		rs.close();
 		stmt.close();
@@ -176,14 +178,14 @@ public Pessoa getById(Pessoa pessoa) {
 
 	return result;
 }
-public boolean LancerPadraoMais(Pessoa pessoa) {
+public boolean LancerPadraoMaisNecessidade(Pessoa pessoa) {
 
 	
-	String sql = "update pessoa set padrao=? where id=?";
+	String sql = "update pessoa set necessidade=? where id=?";
 	try {
 		PreparedStatement stmt = connection.prepareStatement(sql);
 	
-	System.out.println(pessoa.getPadrao());
+	System.out.println(pessoa.getNecessidade());
 		stmt.setString(1, "1");
 		stmt.setLong(2, pessoa.getId());
 		stmt.execute();
@@ -239,7 +241,7 @@ public Pessoa selectDePessoasPeloSangue(Pessoa pessoa) {
 			result.setId(rs.getLong("id"));
 			result.setNome(rs.getString("nome"));
 			System.out.println(rs.getString("nome"));
-			System.out.println(rs.getLong("id"));
+			System.out.println("o id"+ rs.getLong("id"));
 			LancerPadraoMais(pessoa);
 
 		}
@@ -283,5 +285,22 @@ public List<Pessoa> getListaSelect(Pessoa pessoa) {
 
 	return result;
 }
+public boolean LancerPadraoMais(Pessoa pessoa) {
 
+	
+	String sql = "update pessoa set necessidade=? where id=?";
+	try {
+		PreparedStatement stmt = connection.prepareStatement(sql);
+	
+	System.out.println(pessoa.getNecessidade());
+		stmt.setString(1, "1");
+		stmt.setLong(2, pessoa.getId());
+		stmt.execute();
+		stmt.close();
+	} catch (SQLException e) {
+		e.printStackTrace();
+		return false;
+	}
+	return true;
+}
 }

@@ -22,27 +22,37 @@
 				<th>tipo sangue</th>
 				<th>ação</th>
 				<th>Opção</th>
-					<th>id</th>
+					
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach var="pessoa" items="${pessoa }">
 				<tr>
 					<c:if test="${pessoa.acao == 'Receptor' }">
+				
 					<td>${pessoa.nome }</td>
 					<td>${pessoa.email }</td>
 					<td>${pessoa.endereco }</td>
 					<td>${pessoa.tipoSangue }</td>
 				 
 					<td>${pessoa.acao }</td>
+					
+					<c:if test="${pessoa.necessidade == '1' }">
+					<td> está pessoa ja pediu doacao </td>
+					</c:if>
+					<c:if test="${pessoa.necessidade == 0 }">
 					<td><a href="/projetao/pessoa/lancer?id=${pessoa.id }">pedir doacao para esta pessoa</a></td>
 		
-<td>${pessoa.id }</td>
+</c:if>
+<c:if test="${pessoa.necessidade == null }">
+					<td><a href="/projetao/pessoa/lancer?id=${pessoa.id }">pedir doacao para esta pessoa</a></td>
+		
+</c:if>
 				
 				
 				</tr>
-				
-			 </c:if>
+				</c:if>
+			 
 				
 				
 				

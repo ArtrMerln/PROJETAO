@@ -21,7 +21,7 @@
 				<th>Endereço</th>
 				<th>tipo sangue</th>
 				<th>ação</th>
-				
+				<th>vinculo</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -32,7 +32,7 @@
 					<td>${pessoa.endereco }</td>
 					<td>${pessoa.tipoSangue }</td>
 					<td>${pessoa.acao }</td>
-				
+				<td>hospital ${pessoa.vinculoHospital }</td>
 			
 				
 				</tr>
